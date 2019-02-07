@@ -1,0 +1,11 @@
+database:
+  host: account.otaku-shelter.ru
+  port: 5432
+  database: otakushelter
+  userid: otakushelter
+  password: otakushelter
+  migrationstable: migrations
+  
+secret: secretsecretsecretsecretsecret
+issuer: otakushelter.issuer
+audience: otakushelter.audience
