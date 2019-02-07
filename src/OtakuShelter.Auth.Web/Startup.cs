@@ -29,6 +29,9 @@ namespace OtakuShelter.Auth.Web
 			
 			app.UseAuthentication();
 			
+			app.UseSwagger();
+			app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "OtakuShelter Auth API v1"));
+			
 			app.UseMvc();
 		}
 	}

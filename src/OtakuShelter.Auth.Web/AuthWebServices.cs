@@ -23,6 +23,7 @@ namespace OtakuShelter.Auth
 				.AddMvcCore()
 				.AddJsonFormatters()
 				.AddAuthorization()
+				.AddApiExplorer()
 				.AddPhemaRouting(routing => routing.AddIdentityController())
 				.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
