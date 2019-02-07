@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Phema.Routing;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace OtakuShelter.Auth
 {
@@ -49,6 +50,9 @@ namespace OtakuShelter.Auth
 						ValidAudience = configuration.Audience
 					};
 				});
+			
+			services.AddSwaggerGen(options => 
+				options.SwaggerDoc("v1", new Info { Title = "OtakuShelter Auth API", Version = "v1" }));
 			
 			return services;
 		}
