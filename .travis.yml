@@ -1,0 +1,15 @@
+language: csharp
+mono: none
+sudo: required
+dist: xenial
+dotnet: 2.2
+install:
+- dotnet restore
+- sudo apt-get install sshpass
+script:
+- docker-compose build
+- docker login -u $OTAKUSHELTER_USERNAME -p $OTAKUSHELTER_PASSWORD
+- docker tag otaku-shelter.auth:1.0.$TRAVIS_BUILD_NUMBER otakushelter/otaku-shelter.auth:1.0.$TRAVIS_BUILD_NUMBER
+- docker push otakushelter/otaku-shelter.auth:1.0.$TRAVIS_BUILD_NUMBER
+- sudo chmod +x ./deploy.sh
+- ./deploy.sh | sudo sshpass -p $AUTH_PASSWORD ssh -o StrictHostKeyChecking=no $AUTH_USERNAME@$AUTH_HOSTNAME
