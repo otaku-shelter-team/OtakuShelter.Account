@@ -25,4 +25,8 @@
     <ProjectReference Include="..\OtakuShelter.Account.Data\OtakuShelter.Account.Data.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<None Include="appsettings.yml" CopyToPublishDirectory="Always" />
+	</ItemGroup>
+
 </Project>
