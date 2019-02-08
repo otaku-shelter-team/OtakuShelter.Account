@@ -29,6 +29,7 @@ namespace OtakuShelter.Account
 			Id = token.Id;
 			IpAddress = token.IpAddress;
 			DateTime = token.DateTime;
+			UserAgent = token.UserAgent;
 		}
 
 		[DataMember(Name = "id")]
@@ -36,6 +37,9 @@ namespace OtakuShelter.Account
 		
 		[DataMember(Name = "ipAddress")]
 		public string IpAddress { get; }
+		
+		[DataMember(Name = "userAgent")]
+		public string UserAgent { get; set; }
 		
 		[DataMember(Name = "dateTime")]
 		public DateTime DateTime { get; }
