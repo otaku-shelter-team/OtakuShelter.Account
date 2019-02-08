@@ -39,7 +39,7 @@ namespace OtakuShelter.Account
 				.WithMany(a => a.Tokens)
 				.IsRequired()
 				.OnDelete(DeleteBehavior.Restrict)
-				.HasConstraintName("FK_account_sessions");
+				.HasConstraintName("FK_account_tokens");
 		}
 	}
 }
