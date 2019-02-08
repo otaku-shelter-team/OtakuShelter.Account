@@ -6,7 +6,7 @@ using Phema.Configuration;
 
 namespace OtakuShelter.Account
 {
-	public class Program
+	public class  Program
 	{
 		public static async Task Main(string[] args)
 		{
@@ -19,7 +19,7 @@ namespace OtakuShelter.Account
 					builder.AddConsole()
 						.SetMinimumLevel(LogLevel.Warning))
 				.UseStartup<Startup>()
-				.UseConfiguration<AuthWebConfiguration>()
+				.UseConfiguration<AccountWebConfiguration>()
 				.Build();
 
 			await app.RunAsync();

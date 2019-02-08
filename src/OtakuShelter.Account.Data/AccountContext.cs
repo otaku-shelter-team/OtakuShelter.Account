@@ -9,10 +9,12 @@ namespace OtakuShelter.Account
 		}
 		
 		public DbSet<Account> Accounts { get; set; }
+		public DbSet<Token> Tokens { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfiguration(new AccountConfiguration());
+			modelBuilder.ApplyConfiguration(new TokenConfiguration());
 		}
 	}
 }

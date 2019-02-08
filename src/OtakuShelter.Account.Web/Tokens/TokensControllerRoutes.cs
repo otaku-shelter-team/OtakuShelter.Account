@@ -10,6 +10,17 @@ namespace OtakuShelter.Account
 			{
 				controller.AddRoute(c => c.Create(From.Body<CreateTokenViewModel>()))
 					.HttpPost();
+
+				controller.AddRoute(c => c.Read())
+					.HttpGet()
+					.Authorize();
+
+				controller.AddRoute("{tokenId}", c => c.Delete(From.Route<DeleteTokenViewModel>()))
+					.HttpDelete()
+					.Authorize();
+
+				controller.AddRoute("refresh", c => c.Refresh(From.Body<RefreshTokenViewModel>()))
+					.HttpPost();
 			});
 			
 			return builder;

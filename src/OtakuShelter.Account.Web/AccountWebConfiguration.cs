@@ -1,6 +1,6 @@
 namespace OtakuShelter.Account
 {
-	public class AuthWebConfiguration
+	public class AccountWebConfiguration
 	{
 		public string Secret { get; set; }
 		public string Issuer { get; set; }

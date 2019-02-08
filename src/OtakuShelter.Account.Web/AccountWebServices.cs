@@ -12,9 +12,9 @@ using Swashbuckle.AspNetCore.Swagger;
 
 namespace OtakuShelter.Account
 {
-	public static class OtakuShelterAuthServices
+	public static class AccountWebServices
 	{
-		public static IServiceCollection AddWebServices(this IServiceCollection services, AuthWebConfiguration configuration)
+		public static IServiceCollection AddWebServices(this IServiceCollection services, AccountWebConfiguration configuration)
 		{
 			services.AddCors();
 			

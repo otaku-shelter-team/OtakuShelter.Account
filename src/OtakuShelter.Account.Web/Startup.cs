@@ -8,9 +8,9 @@ namespace OtakuShelter.Account
 {
 	public class Startup : IStartup
 	{
-		private readonly AuthWebConfiguration configuration;
+		private readonly AccountWebConfiguration configuration;
 
-		public Startup(IOptions<AuthWebConfiguration> configuration)
+		public Startup(IOptions<AccountWebConfiguration> configuration)
 		{
 			this.configuration = configuration.Value;
 		}

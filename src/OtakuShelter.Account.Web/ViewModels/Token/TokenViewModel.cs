@@ -5,12 +5,16 @@ namespace OtakuShelter.Account
 	[DataContract]
 	public class TokenViewModel
 	{
-		public TokenViewModel(string token)
+		public TokenViewModel(string accessToken, string refreshToken)
 		{
-			Token = token;
+			AccessToken = accessToken;
+			RefreshToken = refreshToken;
 		}
 		
-		[DataMember(Name = "token")]
-		public string Token { get; set; }
+		[DataMember(Name = "accessToken")]
+		public string AccessToken { get; set; }
+
+		[DataMember(Name = "refreshToken")]
+		public string RefreshToken { get; }
 	}
 }

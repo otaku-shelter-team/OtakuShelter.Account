@@ -1,37 +1,25 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Runtime.Serialization;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 namespace OtakuShelter.Account
 {
-	[DataContract]
-	public class CreateTokenViewModel
+	public class RefreshTokenViewModel
 	{
-		[DataMember(Name = "username")]
-		public string Username { get; set; }
-
-		[DataMember(Name = "password")]
-		public string Password { get; set; }
-
-		public async Task<TokenViewModel> Create(AccountContext context,
-			IPasswordHasher<Account> hasher,
-			AccountWebConfiguration configuration,
-			HttpContext httpContext)
+		public string RefreshToken { get; set; }
+		
+		public async Task<TokenViewModel> Refresh(AccountContext context, AccountWebConfiguration configuration, int accountId, HttpContext httpContext)
 		{
-			var account = await context.Accounts.FirstAsync(a => a.Username == Username);
+			var account = await context.Accounts.FirstAsync(a => a.Id == accountId);
 
-			var result = hasher.VerifyHashedPassword(account, account.PasswordHash, Password);
-
-			if (result != PasswordVerificationResult.Success)
-				throw new UnauthorizedAccessException();
+			var tokenToRemove = account.Tokens.First(t => t.RefreshToken == RefreshToken);
 			
 			var secret = Encoding.ASCII.GetBytes(configuration.Secret);
 			var tokenHandler = new JwtSecurityTokenHandler();
@@ -63,6 +51,7 @@ namespace OtakuShelter.Account
 			};
 
 			await context.Tokens.AddAsync(token);
+			context.Tokens.Remove(tokenToRemove);
 			
 			return new TokenViewModel(access, refresh);
 		}
