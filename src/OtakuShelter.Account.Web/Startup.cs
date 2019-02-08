@@ -18,7 +18,7 @@ namespace OtakuShelter.Account
 		public IServiceProvider ConfigureServices(IServiceCollection services)
 		{
 			return services
-				.AddDataServices(configuration.AccountContext)
+				.AddDataServices(configuration.Database)
 				.AddWebServices(configuration)
 				.BuildServiceProvider();
 		}

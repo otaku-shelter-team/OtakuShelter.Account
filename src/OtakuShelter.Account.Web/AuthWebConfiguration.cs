@@ -6,6 +6,6 @@ namespace OtakuShelter.Account
 		public string Issuer { get; set; }
 		public string Audience { get; set; }
 		
-		public AccountContextConfiguration AccountContext { get; set; }
+		public AccountContextConfiguration Database { get; set; }
 	}
 }
