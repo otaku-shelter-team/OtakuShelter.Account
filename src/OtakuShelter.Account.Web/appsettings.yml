@@ -9,3 +9,4 @@ database:
 secret: secretsecretsecretsecretsecret
 issuer: otakushelter.issuer
 audience: otakushelter.audience
+maxtokenscount: 10

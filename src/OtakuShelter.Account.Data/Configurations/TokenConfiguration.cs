@@ -23,6 +23,10 @@ namespace OtakuShelter.Account
 				.HasMaxLength(500)
 				.IsRequired();
 
+			builder.Property(s => s.UserAgent)
+				.HasColumnName("useragent")
+				.HasMaxLength(100);
+			
 			builder.Property(s => s.DateTime)
 				.HasColumnName("datetime")
 				.IsRequired();

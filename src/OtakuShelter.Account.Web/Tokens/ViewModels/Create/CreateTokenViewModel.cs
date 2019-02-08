@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 
 namespace OtakuShelter.Account
 {
@@ -33,6 +34,11 @@ namespace OtakuShelter.Account
 			if (result != PasswordVerificationResult.Success)
 				throw new UnauthorizedAccessException();
 			
+			if (account.Tokens.Count >= configuration.MaxTokensCount)
+			{
+				context.Tokens.RemoveRange(account.Tokens);
+			}
+			
 			var secret = Encoding.ASCII.GetBytes(configuration.Secret);
 			var tokenHandler = new JwtSecurityTokenHandler();
 			
@@ -54,11 +60,14 @@ namespace OtakuShelter.Account
 				Enumerable.Repeat(0, 5)
 					.Select(_ => new Guid().ToString("N")));
 			
+			
+			
 			var token = new Token
 			{
 				Account = account,
 				DateTime = DateTime.Now,
 				IpAddress = httpContext.Connection.RemoteIpAddress.ToString(),
+				UserAgent = httpContext.Request.Headers[HeaderNames.UserAgent],
 				RefreshToken = refresh
 			};
 
