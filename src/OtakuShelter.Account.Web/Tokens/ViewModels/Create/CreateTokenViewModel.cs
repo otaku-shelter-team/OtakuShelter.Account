@@ -60,12 +60,10 @@ namespace OtakuShelter.Account
 				Enumerable.Repeat(0, 5)
 					.Select(_ => new Guid().ToString("N")));
 			
-			
-			
 			var token = new Token
 			{
 				Account = account,
-				DateTime = DateTime.Now,
+				DateTime = DateTime.UtcNow,
 				IpAddress = httpContext.Connection.RemoteIpAddress.ToString(),
 				UserAgent = httpContext.Request.Headers[HeaderNames.UserAgent],
 				RefreshToken = refresh

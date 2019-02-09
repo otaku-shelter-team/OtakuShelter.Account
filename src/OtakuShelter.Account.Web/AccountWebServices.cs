@@ -7,8 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
-using Phema.Routing;
 using Swashbuckle.AspNetCore.Swagger;
+
+using Phema.Routing;
 
 namespace OtakuShelter.Account
 {
@@ -27,7 +28,8 @@ namespace OtakuShelter.Account
 				.AddApiExplorer()
 				.AddPhemaRouting(routing => 
 					routing.AddAccountsController()
-						.AddTokensController())
+						.AddTokensController()
+						.AddRolesController())
 				.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
 			services.AddAuthorization();

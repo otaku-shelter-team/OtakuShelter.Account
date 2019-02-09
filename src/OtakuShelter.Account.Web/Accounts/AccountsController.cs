@@ -22,11 +22,29 @@ namespace OtakuShelter.Account
 			await context.SaveChangesAsync();
 		}
 
-		public async Task<ReadAccountViewModel> Read()
+		public async Task<ReadAccountViewModel> Read(FilterViewModel filter)
+		{
+			var model = new ReadAccountViewModel();
+
+			await model.Load(context, filter.Offset, filter.Limit);
+
+			return model;
+		}
+
+		public async Task<ReadByIdAccountViewModel> ReadById(int accountId)
+		{
+			var model = new ReadByIdAccountViewModel();
+
+			await model.Load(context, accountId);
+
+			return model;
+		}
+
+		public async Task<ReadSelfAccountViewModel> ReadSelf()
 		{
 			var accountId = int.Parse(User.Identity.Name);
 			
-			var model = new ReadAccountViewModel();
+			var model = new ReadSelfAccountViewModel();
 			
 			await model.Read(context, accountId);
 
@@ -42,11 +60,25 @@ namespace OtakuShelter.Account
 			await context.SaveChangesAsync();
 		}
 
+		public async Task UpdateById(int accountId, UpdateByIdAccountViewModel model)
+		{
+			await model.Update(context, hasher, accountId);
+
+			await context.SaveChangesAsync();
+		}
+
 		public async Task Delete(DeleteAccountViewModel model)
 		{
 			var accountId = int.Parse(User.Identity.Name);
 
 			await model.Delete(context, accountId);
+
+			await context.SaveChangesAsync();
+		}
+
+		public async Task DeleteById(DeleteByIdAccountViewModel model)
+		{
+			await model.Delete(context);
 
 			await context.SaveChangesAsync();
 		}

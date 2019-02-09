@@ -18,10 +18,24 @@ namespace OtakuShelter.Account
 				.HasMaxLength(50)
 				.IsRequired();
 
-			builder.Property(i => i.PasswordHash)
+			builder.Property(a => a.PasswordHash)
 				.HasColumnName("passwordhash")
 				.HasMaxLength(500)
 				.IsRequired();
+
+			builder.Property(a => a.Created)
+				.HasColumnName("created")
+				.IsRequired();
+
+			builder.Property(a => a.RoleId)
+				.HasColumnName("roleid")
+				.IsRequired();
+
+			builder.HasOne(a => a.Role)
+				.WithMany(r => r.Accounts)
+				.IsRequired()
+				.OnDelete(DeleteBehavior.Restrict)
+				.HasConstraintName("FK_role_accounts");
 		}
 	}
 }

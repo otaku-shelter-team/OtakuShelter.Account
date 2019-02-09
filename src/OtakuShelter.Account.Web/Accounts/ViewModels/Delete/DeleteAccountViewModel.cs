@@ -10,6 +10,7 @@ namespace OtakuShelter.Account
 			var account = await context.Accounts.FirstAsync(i => i.Id == accountId);
 
 			context.Accounts.Remove(account);
+			context.Tokens.RemoveRange(account.Tokens);
 		}
 	}
 }

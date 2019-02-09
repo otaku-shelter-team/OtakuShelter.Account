@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace OtakuShelter.Account
@@ -7,14 +10,32 @@ namespace OtakuShelter.Account
 	[DataContract]
 	public class ReadAccountViewModel
 	{
-		[DataMember(Name = "username")]
-		public string Username { get; set; }
+		[DataMember(Name = "accounts")]
+		public ICollection<ReadAccountItemViewModel> Accounts { get; set; }
 		
-		public async Task Read(AccountContext context, int accountId)
+		public async Task Load(AccountContext context, int offset, int limit)
 		{
-			var account = await context.Accounts.FirstAsync(i => i.Id == accountId);
+			Accounts = await context.Accounts
+				.Skip(offset)
+				.Take(limit)
+				.Select(account => new ReadAccountItemViewModel(account))
+				.ToListAsync();
+		}
+	}
 
+	[DataContract]
+	public class ReadAccountItemViewModel
+	{
+		public ReadAccountItemViewModel(Account account)
+		{
+			Id = account.Id;
 			Username = account.Username;
 		}
+
+		[DataMember(Name = "id")]
+		public int Id { get; }
+		
+		[DataMember(Name = "username")]
+		public string Username { get; }
 	}
 }
