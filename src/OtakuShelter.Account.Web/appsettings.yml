@@ -1,9 +1,9 @@
 database:
-  host: account.otaku-shelter.ru
+  host: database.otaku-shelter.ru
   port: 5432
-  database: otakushelter
-  userid: otakushelter
-  password: otakushelter
+  database: account
+  userid: account
+  password: account
   migrationstable: migrations
   
 secret: secretsecretsecretsecretsecret
