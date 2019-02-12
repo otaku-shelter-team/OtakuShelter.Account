@@ -34,7 +34,7 @@ namespace OtakuShelter.Account
 			app.UseSwaggerUI(options =>
 			{
 				options.SwaggerEndpoint("v1/swagger.json", "OtakuShelter Account API v1");
-				options.DocumentTitle = "OtakuShelter Account API v1";
+				options.DocumentTitle = "OtakuShelter Account API";
 				options.DocExpansion(DocExpansion.None);
 			});
 			
