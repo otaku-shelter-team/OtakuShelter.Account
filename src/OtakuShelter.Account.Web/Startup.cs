@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace OtakuShelter.Account
 {
@@ -30,7 +31,12 @@ namespace OtakuShelter.Account
 			app.UseAuthentication();
 			
 			app.UseSwagger();
-			app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "OtakuShelter Account API v1"));
+			app.UseSwaggerUI(options =>
+			{
+				options.SwaggerEndpoint("v1/swagger.json", "OtakuShelter Account API v1");
+				options.DocumentTitle = "OtakuShelter Account API v1";
+				options.DocExpansion(DocExpansion.None);
+			});
 			
 			app.UseMvc();
 		}

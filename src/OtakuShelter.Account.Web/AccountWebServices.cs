@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -24,15 +26,14 @@ namespace OtakuShelter.Account
 			services
 				.AddMvcCore()
 				.AddJsonFormatters()
-				.AddAuthorization()
+				.AddAuthorization(options =>
+					options.AddPolicy("admin", builder => builder.RequireRole("admin")))
 				.AddApiExplorer()
 				.AddPhemaRouting(routing => 
 					routing.AddAccountsController()
 						.AddTokensController()
 						.AddRolesController())
 				.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-			services.AddAuthorization();
 			
 			var secret = Encoding.ASCII.GetBytes(configuration.Secret);
 			services.AddAuthentication(x =>
@@ -55,8 +56,23 @@ namespace OtakuShelter.Account
 					};
 				});
 			
-			services.AddSwaggerGen(options => 
-				options.SwaggerDoc("v1", new Info { Title = "OtakuShelter Account API", Version = "v1" }));
+			services.AddSwaggerGen(options =>
+			{
+				options.SwaggerDoc("v1", new Info {Title = "OtakuShelter Account API", Version = "v1"});
+				
+				options.AddSecurityDefinition("Bearer", new ApiKeyScheme
+				{
+					Description = "JWT Authorization header",
+					Name = "Authorization",
+					In = "header",
+					Type = "apiKey"
+				});
+				
+				options.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+				{
+					["Bearer"] = Enumerable.Empty<string>()
+				});
+			});
 			
 			return services;
 		}

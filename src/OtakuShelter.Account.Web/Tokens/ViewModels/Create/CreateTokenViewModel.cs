@@ -47,6 +47,7 @@ namespace OtakuShelter.Account
 				Subject = new ClaimsIdentity(new [] 
 				{
 					new Claim(ClaimTypes.Name, account.Id.ToString()),
+					new Claim(ClaimTypes.Role, account.Role.Name)
 				}),
 				Expires = DateTime.UtcNow.AddDays(7),
 				Issuer = configuration.Issuer,
@@ -56,9 +57,10 @@ namespace OtakuShelter.Account
 
 			var access = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
 
-			var refresh = string.Join("",
-				Enumerable.Repeat(0, 5)
-					.Select(_ => new Guid().ToString("N")));
+			var data = new byte[100];
+			new Random().NextBytes(data);
+
+			var refresh = Convert.ToBase64String(data);
 			
 			var token = new Token
 			{

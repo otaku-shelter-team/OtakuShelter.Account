@@ -20,7 +20,7 @@ namespace OtakuShelter.Account
 					.HttpPut()
 					.Authorize("admin");
 
-				controller.AddRoute(c => c.Delete(From.Route<DeleteRoleViewModel>()))
+				controller.AddRoute("{roleId}", c => c.Delete(From.Route<DeleteRoleViewModel>()))
 					.HttpDelete()
 					.Authorize("admin");
 			});

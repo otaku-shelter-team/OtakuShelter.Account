@@ -17,8 +17,6 @@ namespace OtakuShelter.Account
 				.HasColumnName("name")
 				.HasMaxLength(20)
 				.IsRequired();
-
-			builder.HasData(new Role { Id = 1, Name = "user"}, new Role {Id = 2, Name = "admin"});
 		}
 	}
 }

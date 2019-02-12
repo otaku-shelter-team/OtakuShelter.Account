@@ -38,9 +38,10 @@ namespace OtakuShelter.Account
 
 			var access = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
 
-			var refresh = string.Join("",
-				Enumerable.Repeat(0, 5)
-					.Select(_ => new Guid().ToString("N")));
+			var data = new byte[100];
+			new Random().NextBytes(data);
+
+			var refresh = Convert.ToBase64String(data);
 			
 			var token = new Token
 			{
