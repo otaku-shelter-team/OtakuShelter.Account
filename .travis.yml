@@ -8,8 +8,7 @@ install:
 - sudo apt-get install sshpass
 script:
 - docker-compose build
-- docker login -u $OTAKUSHELTER_USERNAME -p $OTAKUSHELTER_PASSWORD
-- docker tag otaku-shelter.account:1.0.$TRAVIS_BUILD_NUMBER otakushelter/otaku-shelter.account:1.0.$TRAVIS_BUILD_NUMBER
+- docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
 - docker push otakushelter/otaku-shelter.account:1.0.$TRAVIS_BUILD_NUMBER
 - sudo chmod +x ./deploy.sh
-- ./deploy.sh | sudo sshpass -p $ACCOUNT_PASSWORD ssh -o StrictHostKeyChecking=no $ACCOUNT_USERNAME@$ACCOUNT_HOSTNAME
+- ./deploy.sh | sudo sshpass -p $ACCOUNT_PASSWORD ssh -o StrictHostKeyChecking=no $ACCOUNT_CONNECTION
