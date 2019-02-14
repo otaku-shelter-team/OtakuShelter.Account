@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OtakuShelter.Account
 {
-	public class UpdateByIdAccountViewModel
+	[DataContract]
+	public class AdminUpdateByIdAccountViewModel
 	{
 		[DataMember(Name = "username")]
 		public string Username { get; set; }

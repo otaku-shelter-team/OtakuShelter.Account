@@ -14,15 +14,7 @@ namespace OtakuShelter.Account
 				controller.AddRoute(c => c.Create(From.Body<CreateAccountViewModel>()))
 					.HttpPost();
 
-				controller.AddRoute(c => c.Read(From.Query<FilterViewModel>()))
-					.HttpGet()
-					.Authorize("admin");
-
-				controller.AddRoute("{accountId}", c => c.ReadById(From.Route<int>()))
-					.HttpGet()
-					.Authorize("admin");
-				
-				controller.AddRoute("self", c => c.ReadSelf())
+				controller.AddRoute(c => c.Read())
 					.HttpGet()
 					.Authorize();
 
@@ -30,15 +22,24 @@ namespace OtakuShelter.Account
 					.HttpPut()
 					.Authorize();
 
-				controller.AddRoute("{accountId}", c => c.UpdateById(From.Route<int>(), From.Body<UpdateByIdAccountViewModel>()))
-					.HttpPut()
-					.Authorize("admin");
-
 				controller.AddRoute(c => c.Delete(From.Any<DeleteAccountViewModel>()))
 					.HttpDelete()
 					.Authorize();
 
-				controller.AddRoute("{accountId}", c => c.DeleteById(From.Route<DeleteByIdAccountViewModel>()))
+				controller.AddRoute("admin", c => c.AdminRead(From.Query<FilterViewModel>()))
+					.HttpGet()
+					.Authorize("admin");
+
+				controller.AddRoute("admin/{accountId}", c => c.AdminReadById(From.Route<int>()))
+					.HttpGet()
+					.Authorize("admin");
+
+				controller.AddRoute("admin/{accountId}",
+						c => c.AdminUpdateById(From.Route<int>(), From.Body<AdminUpdateByIdAccountViewModel>()))
+					.HttpPut()
+					.Authorize("admin");
+
+				controller.AddRoute("admin/{accountId}", c => c.AdminDeleteById(From.Route<AdminDeleteByIdAccountViewModel>()))
 					.HttpDelete()
 					.Authorize("admin");
 			});

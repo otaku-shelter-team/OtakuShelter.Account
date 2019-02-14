@@ -15,30 +15,30 @@ namespace OtakuShelter.Account
 			this.context = context;
 		}
 
-		public async Task Create(CreateRoleViewModel model)
+		public async Task AdminCreate(AdminCreateRoleViewModel model)
 		{
 			await model.Create(context);
 
 			await context.SaveChangesAsync();
 		}
 
-		public async Task<ReadRoleViewModel> Read(FilterViewModel filter)
+		public async Task<AdminReadRoleViewModel> AdminRead(FilterViewModel filter)
 		{
-			var model = new ReadRoleViewModel();
+			var model = new AdminReadRoleViewModel();
 
 			await model.Load(context, filter.Offset, filter.Limit);
 
 			return model;
 		}
 
-		public async Task Update(int roleId, UpdateRoleViewModel model)
+		public async Task AdminUpdate(int roleId, AdminUpdateRoleViewModel model)
 		{
 			await model.Update(context, roleId);
 
 			await context.SaveChangesAsync();
 		}
 
-		public async Task Delete(DeleteRoleViewModel model)
+		public async Task AdminDelete(AdminDeleteRoleViewModel model)
 		{
 			await model.Delete(context);
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace OtakuShelter.Account
 {
 	[DataContract]
-	public class UpdateRoleViewModel
+	public class AdminUpdateRoleViewModel
 	{
 		[DataMember(Name = "name")]
 		public string Name { get; set; }

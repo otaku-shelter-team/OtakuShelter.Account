@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 
 namespace OtakuShelter.Account
 {
@@ -46,8 +47,9 @@ namespace OtakuShelter.Account
 			var token = new Token
 			{
 				Account = account,
-				DateTime = DateTime.Now,
+				Created = DateTime.UtcNow,
 				IpAddress = httpContext.Connection.RemoteIpAddress.ToString(),
+				UserAgent = httpContext.Request.Headers[HeaderNames.UserAgent],
 				RefreshToken = refresh
 			};
 

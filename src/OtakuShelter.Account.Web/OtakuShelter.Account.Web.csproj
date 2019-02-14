@@ -29,4 +29,8 @@
 		<None Include="appsettings.yml" CopyToPublishDirectory="Always" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Roles\ViewModels\Admin" />
+	</ItemGroup>
+
 </Project>

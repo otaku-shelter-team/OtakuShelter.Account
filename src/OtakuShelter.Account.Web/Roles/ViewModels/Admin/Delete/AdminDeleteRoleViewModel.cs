@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace OtakuShelter.Account
 {
 	[DataContract]
-	public class DeleteRoleViewModel
+	public class AdminDeleteRoleViewModel
 	{
 		[DataMember(Name = "roleId")]
 		public int RoleId { get; set; }

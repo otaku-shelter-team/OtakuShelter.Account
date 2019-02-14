@@ -22,30 +22,12 @@ namespace OtakuShelter.Account
 			await context.SaveChangesAsync();
 		}
 
-		public async Task<ReadAccountViewModel> Read(FilterViewModel filter)
-		{
-			var model = new ReadAccountViewModel();
-
-			await model.Load(context, filter.Offset, filter.Limit);
-
-			return model;
-		}
-
-		public async Task<ReadByIdAccountViewModel> ReadById(int accountId)
-		{
-			var model = new ReadByIdAccountViewModel();
-
-			await model.Load(context, accountId);
-
-			return model;
-		}
-
-		public async Task<ReadSelfAccountViewModel> ReadSelf()
+		public async Task<ReadAccountViewModel> Read()
 		{
 			var accountId = int.Parse(User.Identity.Name);
 			
-			var model = new ReadSelfAccountViewModel();
-			
+			var model = new ReadAccountViewModel();
+
 			await model.Read(context, accountId);
 
 			return model;
@@ -59,14 +41,7 @@ namespace OtakuShelter.Account
 
 			await context.SaveChangesAsync();
 		}
-
-		public async Task UpdateById(int accountId, UpdateByIdAccountViewModel model)
-		{
-			await model.Update(context, hasher, accountId);
-
-			await context.SaveChangesAsync();
-		}
-
+		
 		public async Task Delete(DeleteAccountViewModel model)
 		{
 			var accountId = int.Parse(User.Identity.Name);
@@ -76,7 +51,32 @@ namespace OtakuShelter.Account
 			await context.SaveChangesAsync();
 		}
 
-		public async Task DeleteById(DeleteByIdAccountViewModel model)
+		public async Task<AdminReadAccountViewModel> AdminRead(FilterViewModel filter)
+		{
+			var model = new AdminReadAccountViewModel();
+
+			await model.Read(context, filter.Offset, filter.Limit);
+
+			return model;
+		}
+
+		public async Task<AdminReadByIdAccountViewModel> AdminReadById(int accountId)
+		{
+			var model = new AdminReadByIdAccountViewModel();
+
+			await model.Read(context, accountId);
+
+			return model;
+		}
+		
+		public async Task AdminUpdateById(int accountId, AdminUpdateByIdAccountViewModel model)
+		{
+			await model.Update(context, hasher, accountId);
+
+			await context.SaveChangesAsync();
+		}
+
+		public async Task AdminDeleteById(AdminDeleteByIdAccountViewModel model)
 		{
 			await model.Delete(context);
 

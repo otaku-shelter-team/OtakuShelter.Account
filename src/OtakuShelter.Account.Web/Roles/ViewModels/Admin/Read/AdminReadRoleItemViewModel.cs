@@ -3,9 +3,9 @@ using System.Runtime.Serialization;
 namespace OtakuShelter.Account
 {
 	[DataContract]
-	public class ReadRoleItemViewModel
+	public class AdminReadRoleItemViewModel
 	{
-		public ReadRoleItemViewModel(Role role)
+		public AdminReadRoleItemViewModel(Role role)
 		{
 			Id = role.Id;
 			Name = role.Name;

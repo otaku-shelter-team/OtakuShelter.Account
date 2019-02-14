@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Identity;
+
 using Phema.Routing;
 
 namespace OtakuShelter.Account
@@ -19,8 +21,17 @@ namespace OtakuShelter.Account
 					.HttpDelete()
 					.Authorize();
 
-				controller.AddRoute("refresh", c => c.Refresh(From.Body<RefreshTokenViewModel>()))
-					.HttpPost();
+				controller.AddRoute(c => c.Refresh(From.Body<RefreshTokenViewModel>()))
+					.HttpPut();
+
+				controller.AddRoute("admin/{accountId}", c => c.AdminReadById(From.Route<int>()))
+					.HttpGet()
+					.Authorize("admin");
+
+				controller.AddRoute("admin/{tokenId}",
+						c => c.AdminDeleteById(From.Route<AdminDeleteByIdTokenViewModel>()))
+					.HttpDelete()
+					.Authorize("admin");
 			});
 			
 			return builder;

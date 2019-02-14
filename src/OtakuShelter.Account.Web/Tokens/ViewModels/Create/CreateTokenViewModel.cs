@@ -65,7 +65,7 @@ namespace OtakuShelter.Account
 			var token = new Token
 			{
 				Account = account,
-				DateTime = DateTime.UtcNow,
+				Created = DateTime.UtcNow,
 				IpAddress = httpContext.Connection.RemoteIpAddress.ToString(),
 				UserAgent = httpContext.Request.Headers[HeaderNames.UserAgent],
 				RefreshToken = refresh

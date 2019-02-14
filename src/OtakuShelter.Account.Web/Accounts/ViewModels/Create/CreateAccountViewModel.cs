@@ -16,7 +16,6 @@ namespace OtakuShelter.Account
 		[DataMember(Name = "password")]
 		public string Password { get; set; }
 
-
 		public async Task Create(AccountContext context, IPasswordHasher<Account> hasher)
 		{
 			var role = await context.Roles.OrderBy(r => r.Id).FirstAsync();

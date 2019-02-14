@@ -37,16 +37,7 @@ namespace OtakuShelter.Account
 
 			return model;
 		}
-
-		public async Task Delete(DeleteTokenViewModel model)
-		{
-			var accountId = int.Parse(User.Identity.Name);
-
-			await model.Delete(context, accountId);
-
-			await context.SaveChangesAsync();
-		}
-
+		
 		public async Task<TokenViewModel> Refresh(RefreshTokenViewModel model)
 		{
 			var accountId = int.Parse(User.Identity.Name);
@@ -56,6 +47,31 @@ namespace OtakuShelter.Account
 			await context.SaveChangesAsync();
 			
 			return token;
+		}
+
+		public async Task Delete(DeleteTokenViewModel model)
+		{
+			var accountId = int.Parse(User.Identity.Name);
+
+			await model.Delete(context, accountId);
+
+			await context.SaveChangesAsync();
+		}
+		
+		public async Task<AdminReadByIdTokenViewModel> AdminReadById(int accountId)
+		{
+			var model = new AdminReadByIdTokenViewModel();
+
+			await model.Load(context, accountId);
+
+			return model;
+		}
+		
+		public async Task AdminDeleteById(AdminDeleteByIdTokenViewModel model)
+		{
+			await model.Delete(context);
+
+			await context.SaveChangesAsync();
 		}
 	}
 }

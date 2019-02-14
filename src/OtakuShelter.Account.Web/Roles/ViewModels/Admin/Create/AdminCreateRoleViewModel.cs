@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 namespace OtakuShelter.Account
 {
 	[DataContract]
-	public class CreateRoleViewModel
+	public class AdminCreateRoleViewModel
 	{
 		[DataMember(Name = "name")]
 		public string Name { get; set; }
