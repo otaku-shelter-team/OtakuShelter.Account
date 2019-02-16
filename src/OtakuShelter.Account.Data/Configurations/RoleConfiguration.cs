@@ -28,7 +28,6 @@ namespace OtakuShelter.Account
 			builder.HasOne(r => r.Creator)
 				.WithMany(a => a.Roles)
 				.OnDelete(DeleteBehavior.Restrict)
-				.IsRequired()
 				.HasConstraintName("FK_creator_roles");
 		}
 	}
