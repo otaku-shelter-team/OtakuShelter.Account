@@ -8,12 +8,16 @@ namespace OtakuShelter.Account
 		{
 			builder.AddController<RolesController>(controller =>
 			{
+				controller.AddRoute("roles", c => c.Read(From.Query<FilterViewModel>()))
+					.HttpGet()
+					.Authorize();
+
+				controller.AddRoute("roles/{roleId}", c => c.ReadById(From.Route<int>()))
+					.HttpGet()
+					.Authorize();
+				
 				controller.AddRoute("admin/roles", c => c.AdminCreate(From.Body<AdminCreateRoleViewModel>()))
 					.HttpPost()
-					.Authorize("admin");
-
-				controller.AddRoute("admin/roles", c => c.AdminRead(From.Query<FilterViewModel>()))
-					.HttpGet()
 					.Authorize("admin");
 
 				controller.AddRoute("admin/roles/{roleId}", c => c.AdminUpdate(From.Route<int>(), From.Body<AdminUpdateRoleViewModel>()))

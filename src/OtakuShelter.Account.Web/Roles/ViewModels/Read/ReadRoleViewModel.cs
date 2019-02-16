@@ -8,17 +8,18 @@ using Microsoft.EntityFrameworkCore;
 namespace OtakuShelter.Account
 {
 	[DataContract]
-	public class AdminReadRoleViewModel
+	public class ReadRoleViewModel
 	{
 		[DataMember(Name = "roles")]
-		public ICollection<AdminReadRoleItemViewModel> Roles { get; private set; }
+		public ICollection<ReadRoleItemViewModel> Roles { get; private set; }
 		
-		public async Task Load(AccountContext context, int offset, int limit)
+		public async Task Read(AccountContext context, int offset, int limit)
 		{
 			Roles = await context.Roles
+				.OrderByDescending(role => role.Created)
 				.Skip(offset)
 				.Take(limit)
-				.Select(role => new AdminReadRoleItemViewModel(role))
+				.Select(role => new ReadRoleItemViewModel(role))
 				.ToListAsync();
 		}
 	}

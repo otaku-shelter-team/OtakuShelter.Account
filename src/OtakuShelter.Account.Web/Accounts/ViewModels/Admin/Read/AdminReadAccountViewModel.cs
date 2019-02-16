@@ -16,6 +16,7 @@ namespace OtakuShelter.Account
 		public async Task Read(AccountContext context, int offset, int limit)
 		{
 			Accounts = await context.Accounts
+				.OrderByDescending(account => account.Created)
 				.Skip(offset)
 				.Take(limit)
 				.Select(account => new AdminReadAccountItemViewModel(account))

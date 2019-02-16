@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace OtakuShelter.Account
@@ -15,5 +16,6 @@ namespace OtakuShelter.Account
 		public virtual Role Role { get; set; }
 		
 		public virtual ICollection<Token> Tokens { get; set; }
+		public virtual ICollection<Role> Roles { get; set; }
 	}
 }

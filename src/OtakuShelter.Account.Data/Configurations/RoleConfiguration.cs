@@ -17,6 +17,20 @@ namespace OtakuShelter.Account
 				.HasColumnName("name")
 				.HasMaxLength(20)
 				.IsRequired();
+
+			builder.Property(r => r.Created)
+				.HasColumnName("created")
+				.IsRequired();
+
+			builder.Property(r => r.CreatorId)
+				.HasColumnName("creatorid")
+				.IsRequired();
+
+			builder.HasOne(r => r.Creator)
+				.WithMany(a => a.Roles)
+				.OnDelete(DeleteBehavior.Restrict)
+				.IsRequired()
+				.HasConstraintName("FK_creator_roles");
 		}
 	}
 }
