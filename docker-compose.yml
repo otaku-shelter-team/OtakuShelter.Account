@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   account-service:
-    image: "otakushelter/otaku-shelter.account:1.0.${TRAVIS_BUILD_NUMBER}"
+    image: "otakushelter/account:1.0.${TRAVIS_BUILD_NUMBER}"
     build:
       context: .
       dockerfile: src/OtakuShelter.Account.Web/Dockerfile

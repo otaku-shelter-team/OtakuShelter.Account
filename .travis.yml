@@ -9,6 +9,6 @@ install:
 script:
 - docker-compose build
 - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
-- docker push otakushelter/otaku-shelter.account:1.0.$TRAVIS_BUILD_NUMBER
+- docker push otakushelter/account:1.0.$TRAVIS_BUILD_NUMBER
 - sudo chmod +x ./deploy.sh
 - ./deploy.sh | sudo sshpass -p $ACCOUNT_PASSWORD ssh -o StrictHostKeyChecking=no $ACCOUNT_CONNECTION
