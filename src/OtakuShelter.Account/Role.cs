@@ -10,7 +10,7 @@ namespace OtakuShelter.Account
 
 		public DateTime Created { get; set; }
 
-		public int CreatorId { get; set; }
+		public int? CreatorId { get; set; }
 		public virtual Account Creator { get; set; }
 		
 		public virtual ICollection<Account> Accounts { get; set; }
