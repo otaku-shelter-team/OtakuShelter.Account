@@ -23,8 +23,7 @@ namespace OtakuShelter.Account
 				.IsRequired();
 
 			builder.Property(r => r.CreatorId)
-				.HasColumnName("creatorid")
-				.IsRequired();
+				.HasColumnName("creatorid");
 
 			builder.HasOne(r => r.Creator)
 				.WithMany(a => a.Roles)
