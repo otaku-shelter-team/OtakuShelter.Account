@@ -11,7 +11,7 @@ namespace OtakuShelter.Account
 			Id = account.Id;
 			Username = account.Username;
 			Created = account.Created;
-			RoleId = account.Role.Id;
+			RoleId = account.RoleId;
 		}
 
 		[DataMember(Name = "id")]
