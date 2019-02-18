@@ -40,9 +40,7 @@ namespace OtakuShelter.Account
 		
 		public async Task<TokenViewModel> Refresh(RefreshTokenViewModel model)
 		{
-			var accountId = int.Parse(User.Identity.Name);
-			
-			var token = await model.Refresh(context, configuration, accountId, HttpContext);
+			var token = await model.Refresh(context, configuration, HttpContext);
 
 			await context.SaveChangesAsync();
 			

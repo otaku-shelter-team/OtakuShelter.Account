@@ -16,11 +16,11 @@ namespace OtakuShelter.Account
 	{
 		public string RefreshToken { get; set; }
 		
-		public async Task<TokenViewModel> Refresh(AccountContext context, AccountWebConfiguration configuration, int accountId, HttpContext httpContext)
+		public async Task<TokenViewModel> Refresh(AccountContext context, AccountWebConfiguration configuration, HttpContext httpContext)
 		{
-			var account = await context.Accounts.FirstAsync(a => a.Id == accountId);
+			var tokenToRemove = await context.Tokens.FirstAsync(t => t.RefreshToken == RefreshToken);
 
-			var tokenToRemove = account.Tokens.First(t => t.RefreshToken == RefreshToken);
+			var account = tokenToRemove.Account;
 			
 			var secret = Encoding.ASCII.GetBytes(configuration.Secret);
 			var tokenHandler = new JwtSecurityTokenHandler();

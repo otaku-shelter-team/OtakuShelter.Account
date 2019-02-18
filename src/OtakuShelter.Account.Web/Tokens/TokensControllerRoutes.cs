@@ -22,8 +22,7 @@ namespace OtakuShelter.Account
 					.Authorize();
 
 				controller.AddRoute("tokens", c => c.Refresh(From.Body<RefreshTokenViewModel>()))
-					.HttpPut()
-					.Authorize();
+					.HttpPut();
 
 				controller.AddRoute("admin/tokens/{accountId}", c => c.AdminReadById(From.Route<int>()))
 					.HttpGet()
