@@ -25,7 +25,7 @@ namespace OtakuShelter.Account
 
 			builder.Property(s => s.UserAgent)
 				.HasColumnName("useragent")
-				.HasMaxLength(100);
+				.HasMaxLength(200);
 			
 			builder.Property(s => s.Created)
 				.HasColumnName("created")
