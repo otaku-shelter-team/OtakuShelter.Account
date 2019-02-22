@@ -1,6 +1,9 @@
-PREVIOUS_VERSION=`expr $TRAVIS_BUILD_NUMBER - 1`
-
-echo docker pull otakushelter/account:1.0.$TRAVIS_BUILD_NUMBER
-echo docker rm \$\(docker stop \$\(docker ps -a -q --filter ancestor=otakushelter/account:1.0.$PREVIOUS_VERSION --format="{{.ID}}"\)\)
-echo docker rmi otakushelter/account:1.0.$PREVIOUS_VERSION -f 
-echo docker run -d -p 127.0.0.1:4002:80 otakushelter/account:1.0.$TRAVIS_BUILD_NUMBER
+echo "cd /root/OtakuShelter.Infrastructure/src && \
+ansible-playbook deploy.yml \
+-e \"\
+otakushelter_hosts=accounts \
+otakushelter_container=otakushelter_account \
+otakushelter_image=otakushelter/account \
+otakushelter_port=4002 \
+otakushelter_build_number=$TRAVIS_BUILD_NUMBER\" \
+-i inventories/staging"
