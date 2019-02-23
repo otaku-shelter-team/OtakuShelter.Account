@@ -1,7 +1,9 @@
 using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
@@ -18,9 +20,13 @@ namespace OtakuShelter.Account
 		
 		public IServiceProvider ConfigureServices(IServiceCollection services)
 		{
+			services.TryAddScoped<IPasswordHasher<Account>, PasswordHasher<Account>>();
+			
 			return services
 				.AddDataServices(configuration.Database)
-				.AddWebServices(configuration)
+				.AddMvcServices(configuration.Roles)
+				.AddAuthenticationServices(configuration)
+				.AddSwaggerServices()
 				.BuildServiceProvider();
 		}
 
