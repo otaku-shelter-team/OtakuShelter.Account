@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
@@ -15,10 +17,10 @@ namespace OtakuShelter.Account
 		[DataMember(Name = "password")]
 		public string Password { get; set; }
 
-		[DataMember(Name = "roleId")]
-		public int? RoleId { get; set; }
+		[DataMember(Name = "role")]
+		public string Role { get; set; }
 
-		public async Task Update(AccountContext context, IPasswordHasher<Account> hasher, int accountId)
+		public async Task Update(AccountContext context, IPasswordHasher<Account> hasher, AccountRoleConfiguration roles, int accountId)
 		{
 			var account = await context.Accounts.FirstAsync(i => i.Id == accountId);
 
@@ -32,11 +34,12 @@ namespace OtakuShelter.Account
 				account.PasswordHash = hasher.HashPassword(account, Password);
 			}
 
-			if (RoleId != null)
+			if (Role != null)
 			{
-				var role = await context.Roles.FirstAsync(r => r.Id == RoleId);
-
-				account.Role = role;
+				if(!roles.IsAny(Role))
+					throw new InvalidOperationException();
+				
+				account.Role = Role;
 			}
 		}
 	}

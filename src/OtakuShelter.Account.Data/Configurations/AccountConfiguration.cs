@@ -31,15 +31,10 @@ namespace OtakuShelter.Account
 				.HasColumnName("created")
 				.IsRequired();
 
-			builder.Property(a => a.RoleId)
-				.HasColumnName("roleid")
+			builder.Property(a => a.Role)
+				.HasColumnName("role")
+				.HasMaxLength(25)
 				.IsRequired();
-
-			builder.HasOne(a => a.Role)
-				.WithMany(r => r.Accounts)
-				.IsRequired()
-				.OnDelete(DeleteBehavior.Restrict)
-				.HasConstraintName("FK_role_accounts");
 		}
 	}
 }

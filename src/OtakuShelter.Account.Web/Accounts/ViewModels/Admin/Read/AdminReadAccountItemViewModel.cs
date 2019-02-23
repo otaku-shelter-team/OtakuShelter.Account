@@ -11,7 +11,7 @@ namespace OtakuShelter.Account
 			Id = account.Id;
 			Username = account.Username;
 			Created = account.Created;
-			RoleId = account.RoleId;
+			Role = account.Role;
 		}
 
 		[DataMember(Name = "id")]
@@ -23,7 +23,7 @@ namespace OtakuShelter.Account
 		[DataMember(Name = "created")]
 		public DateTime Created { get; }
 
-		[DataMember(Name = "roleId")]
-		public int RoleId { get; }
+		[DataMember(Name = "role")]
+		public string Role { get; }
 	}
 }

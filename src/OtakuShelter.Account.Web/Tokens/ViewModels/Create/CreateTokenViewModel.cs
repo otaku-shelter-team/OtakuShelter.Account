@@ -47,7 +47,7 @@ namespace OtakuShelter.Account
 				Subject = new ClaimsIdentity(new [] 
 				{
 					new Claim(ClaimTypes.Name, account.Id.ToString()),
-					new Claim(ClaimTypes.Role, account.Role.Name)
+					new Claim(ClaimTypes.Role, account.Role)
 				}),
 				Expires = DateTime.UtcNow.AddDays(7),
 				Issuer = configuration.Issuer,

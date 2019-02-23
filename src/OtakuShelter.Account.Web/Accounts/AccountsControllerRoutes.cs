@@ -7,7 +7,7 @@ namespace OtakuShelter.Account
 {
 	public static class AccountsControllerRoutes
 	{
-		public static IRoutingBuilder AddAccountsController(this IRoutingBuilder builder)
+		public static IRoutingBuilder AddAccountsController(this IRoutingBuilder builder, AccountRoleConfiguration roles)
 		{
 			builder.AddController<AccountsController>(controller =>
 			{
@@ -28,20 +28,20 @@ namespace OtakuShelter.Account
 
 				controller.AddRoute("admin/accounts", c => c.AdminRead(From.Query<FilterViewModel>()))
 					.HttpGet()
-					.Authorize("admin");
+					.Authorize(roles.Admin);
 
 				controller.AddRoute("admin/accounts/{accountId}", c => c.AdminReadById(From.Route<int>()))
 					.HttpGet()
-					.Authorize("admin");
+					.Authorize(roles.Admin);
 
 				controller.AddRoute("admin/accounts/{accountId}",
 						c => c.AdminUpdateById(From.Route<int>(), From.Body<AdminUpdateByIdAccountViewModel>()))
 					.HttpPut()
-					.Authorize("admin");
+					.Authorize(roles.Admin);
 
 				controller.AddRoute("admin/accounts/{accountId}", c => c.AdminDeleteById(From.Route<AdminDeleteByIdAccountViewModel>()))
 					.HttpDelete()
-					.Authorize("admin");
+					.Authorize(roles.Admin);
 			});
 			
 			return builder;

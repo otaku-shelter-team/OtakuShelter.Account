@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using OtakuShelter.Account;
@@ -9,9 +10,10 @@ using OtakuShelter.Account;
 namespace OtakuShelter.Account.Migrations
 {
     [DbContext(typeof(AccountContext))]
-    partial class AccountContextModelSnapshot : ModelSnapshot
+    [Migration("20190223171000_RemoveRoles")]
+    partial class RemoveRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,10 +36,7 @@ namespace OtakuShelter.Account.Migrations
                         .HasColumnName("passwordhash")
                         .HasMaxLength(500);
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnName("role")
-                        .HasMaxLength(25);
+                    b.Property<string>("Role");
 
                     b.Property<string>("Username")
                         .IsRequired()

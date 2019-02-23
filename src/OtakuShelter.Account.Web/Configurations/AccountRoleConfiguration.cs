@@ -1,3 +1,6 @@
+
+using System.Collections.Generic;
+
 using Phema.Configuration;
 
 namespace OtakuShelter.Account
@@ -7,5 +10,7 @@ namespace OtakuShelter.Account
 	{
 		public string Admin { get; set; }
 		public string User { get; set; }
+
+		public bool IsAny(string role) => role == Admin || role == User;
 	}
 }

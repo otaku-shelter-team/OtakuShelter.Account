@@ -15,8 +15,8 @@ namespace OtakuShelter.Account
 		[DataMember(Name = "created")]
 		public DateTime Created { get; private set; }
 
-		[DataMember(Name = "roleId")]
-		public int RoleId { get; private set; }
+		[DataMember(Name = "role")]
+		public string Role { get; private set; }
 		
 		public async Task Read(AccountContext context, int accountId)
 		{
@@ -24,7 +24,7 @@ namespace OtakuShelter.Account
 
 			Username = account.Username;
 			Created = account.Created;
-			RoleId = account.Role.Id;
+			Role = account.Role;
 		}
 	}
 }
