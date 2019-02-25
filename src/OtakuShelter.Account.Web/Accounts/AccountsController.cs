@@ -21,70 +21,70 @@ namespace OtakuShelter.Account
 			this.hasher = hasher;
 		}
 
-		public async Task Create(CreateAccountViewModel model)
+		public async ValueTask  Create(CreateAccountRequest request)
 		{
-			await model.Create(context, hasher, roles);
+			await request.Create(context, hasher, roles);
 
 			await context.SaveChangesAsync();
 		}
 
-		public async Task<ReadAccountViewModel> Read()
+		public async ValueTask<ReadAccountResponse> Read()
 		{
 			var accountId = int.Parse(User.Identity.Name);
 			
-			var model = new ReadAccountViewModel();
+			var response = new ReadAccountResponse();
 
-			await model.Read(context, accountId);
+			await response.Read(context, accountId);
 
-			return model;
+			return response;
 		}
 
-		public async Task Update(UpdateAccountViewModel model)
+		public async ValueTask  Update(UpdateAccountRequest request)
 		{
 			var accountId = int.Parse(User.Identity.Name);
 
-			await model.Update(context, hasher, accountId);
+			await request.Update(context, hasher, accountId);
 
 			await context.SaveChangesAsync();
 		}
 		
-		public async Task Delete(DeleteAccountViewModel model)
+		public async ValueTask  Delete(DeleteAccountRequest request)
 		{
 			var accountId = int.Parse(User.Identity.Name);
 
-			await model.Delete(context, accountId);
+			await request.Delete(context, accountId);
 
 			await context.SaveChangesAsync();
 		}
 
-		public async Task<AdminReadAccountViewModel> AdminRead(FilterViewModel filter)
+		public async ValueTask<AdminReadAccountResponse> AdminRead(FilterRequest filter)
 		{
-			var model = new AdminReadAccountViewModel();
+			var response = new AdminReadAccountResponse();
 
-			await model.Read(context, filter.Offset, filter.Limit);
+			await response.Read(context, filter.Offset, filter.Limit);
 
-			return model;
+			return response;
 		}
 
-		public async Task<AdminReadByIdAccountViewModel> AdminReadById(int accountId)
+		public async ValueTask<AdminReadByIdAccountResponse> AdminReadById(int accountId)
 		{
-			var model = new AdminReadByIdAccountViewModel();
+			var response = new AdminReadByIdAccountResponse();
 
-			await model.Read(context, accountId);
+			await response.Read(context, accountId);
 
-			return model;
+			return response;
 		}
 		
-		public async Task AdminUpdateById(int accountId, AdminUpdateByIdAccountViewModel model)
+		public async ValueTask  AdminUpdateById(int accountId, AdminUpdateByIdAccountRequest request)
 		{
-			await model.Update(context, hasher, roles, accountId);
+			await request.Update(context, hasher, roles, accountId);
 
 			await context.SaveChangesAsync();
 		}
 
-		public async Task AdminDeleteById(AdminDeleteByIdAccountViewModel model)
+		public async ValueTask  AdminDeleteById(AdminDeleteByIdAccountRequest request)
 		{
-			await model.Delete(context);
+			await request.Delete(context);
 
 			await context.SaveChangesAsync();
 		}

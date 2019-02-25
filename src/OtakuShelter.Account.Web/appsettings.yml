@@ -9,6 +9,6 @@ roles:
   admin: admin
   user: user
 
-issuer: otakushelter.issuer
-audience: otakushelter.audience
+issuer: account.otaku-shelter.ru
+audience: otaku-shelter.ru
 maxtokenscount: 10

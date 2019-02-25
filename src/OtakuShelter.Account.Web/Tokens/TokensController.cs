@@ -18,56 +18,56 @@ namespace OtakuShelter.Account
 			this.configuration = configuration.Value;
 		}
 
-		public async Task<TokenViewModel> Create(CreateTokenViewModel model)
+		public async ValueTask<TokenRequest> Create(CreateTokenRequest request)
 		{
-			var token = await model.Create(context, hasher, configuration, HttpContext);
+			var token = await request.Create(context, hasher, configuration, HttpContext);
 
 			await context.SaveChangesAsync();
 
 			return token;
 		}
 
-		public async Task<ReadTokenViewModel> Read()
+		public async ValueTask<ReadTokenResponse> Read()
 		{
 			var accountId = int.Parse(User.Identity.Name);
 			
-			var model = new ReadTokenViewModel();
+			var response = new ReadTokenResponse();
 
-			await model.Load(context, accountId);
+			await response.Load(context, accountId);
 
-			return model;
+			return response;
 		}
 		
-		public async Task<TokenViewModel> Refresh(RefreshTokenViewModel model)
+		public async ValueTask<TokenRequest> Refresh(RefreshTokenRequest request)
 		{
-			var token = await model.Refresh(context, configuration, HttpContext);
+			var token = await request.Refresh(context, configuration, HttpContext);
 
 			await context.SaveChangesAsync();
 			
 			return token;
 		}
 
-		public async Task Delete(DeleteTokenViewModel model)
+		public async ValueTask  Delete(DeleteTokenRequest request)
 		{
 			var accountId = int.Parse(User.Identity.Name);
 
-			await model.Delete(context, accountId);
+			await request.Delete(context, accountId);
 
 			await context.SaveChangesAsync();
 		}
 		
-		public async Task<AdminReadByIdTokenViewModel> AdminReadById(int accountId)
+		public async ValueTask<AdminReadByIdTokenResponse> AdminReadById(int accountId)
 		{
-			var model = new AdminReadByIdTokenViewModel();
+			var response = new AdminReadByIdTokenResponse();
 
-			await model.Load(context, accountId);
+			await response.Load(context, accountId);
 
-			return model;
+			return response;
 		}
 		
-		public async Task AdminDeleteById(AdminDeleteByIdTokenViewModel model)
+		public async ValueTask  AdminDeleteById(AdminDeleteByIdTokenRequest request)
 		{
-			await model.Delete(context);
+			await request.Delete(context);
 
 			await context.SaveChangesAsync();
 		}
