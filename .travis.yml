@@ -4,8 +4,12 @@ cache: false
 sudo: required
 language: bash
 services: docker
-install:
-- sudo apt-get install sshpass
+
+addons:
+  apt:
+    packages:
+    - sshpass
+    
 script:
 - docker build -t otakushelter/account:1.0.${TRAVIS_BUILD_NUMBER} -f src/OtakuShelter.Account.Web/Dockerfile .
 - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
