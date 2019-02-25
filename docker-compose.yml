@@ -1,9 +1,0 @@
-version: '3.1'
-services:
-  account-service:
-    image: "otakushelter/account:1.0.${TRAVIS_BUILD_NUMBER}"
-    build:
-      context: .
-      dockerfile: src/OtakuShelter.Account.Web/Dockerfile
-    ports:
-    - 80:80

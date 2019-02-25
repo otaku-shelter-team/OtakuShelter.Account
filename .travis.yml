@@ -7,8 +7,19 @@ services: docker
 install:
 - sudo apt-get install sshpass
 script:
-- docker-compose build
+- docker build -t otakushelter/account:1.0.${TRAVIS_BUILD_NUMBER} -f src/OtakuShelter.Account.Web/Dockerfile .
 - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
 - docker push otakushelter/account:1.0.$TRAVIS_BUILD_NUMBER
-- sudo chmod +x ./deploy.sh
-- ./deploy.sh | sudo sshpass -p $ANSIBLE_PASSWORD ssh -o StrictHostKeyChecking=no $ANSIBLE_CONNECTION
+- |
+  sudo sshpass -p $ANSIBLE_PASSWORD ssh -o StrictHostKeyChecking=no $ANSIBLE_CONNECTION \
+    "cd /root/OtakuShelter.Infrastructure/src && \
+    ansible-playbook deploy.yml \
+    -e \"\
+    otakushelter_hosts=accounts \
+    otakushelter_container=otakushelter_account \
+    otakushelter_image=otakushelter/account \
+    otakushelter_port=4002 \
+    otakushelter_build_number=$TRAVIS_BUILD_NUMBER \
+    otakushelter_database_password=$OTAKUSHELTER_DATABASE_PASSWORD \
+    otakushelter_secret=$OTAKUSHELTER_SECRET\" \
+    -i inventories/staging"
