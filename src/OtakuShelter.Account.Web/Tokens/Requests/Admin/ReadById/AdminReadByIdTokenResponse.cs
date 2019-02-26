@@ -13,12 +13,14 @@ namespace OtakuShelter.Account
 		[DataMember(Name = "tokens")]
 		public ICollection<AdminReadByIdTokenItemRequest> Tokens { get; private set; }
 		
-		public async ValueTask  Load(AccountContext context, int accountId)
+		public async ValueTask Load(AccountContext context, int accountId)
 		{
-			var account = await context.Accounts.FirstAsync(a => a.Id == accountId);
-
+			var account = await context.Accounts
+				.Include(a => a.Tokens)
+				.FirstAsync(a => a.Id == accountId);
+			
 			Tokens = account.Tokens
-				.Select(t => new AdminReadByIdTokenItemRequest(t))
+				.Select(token => new AdminReadByIdTokenItemRequest(token))
 				.ToList();
 		}
 	}

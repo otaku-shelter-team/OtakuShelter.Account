@@ -21,7 +21,9 @@ namespace OtakuShelter.Account
 		
 		public async ValueTask<TokenRequest> Refresh(AccountContext context, AccountWebConfiguration configuration, HttpContext httpContext)
 		{
-			var tokenToRemove = await context.Tokens.FirstAsync(t => t.RefreshToken == RefreshToken);
+			var tokenToRemove = await context.Tokens
+				.Include(t => t.Account)
+				.FirstAsync(t => t.RefreshToken == RefreshToken);
 
 			var account = tokenToRemove.Account;
 			

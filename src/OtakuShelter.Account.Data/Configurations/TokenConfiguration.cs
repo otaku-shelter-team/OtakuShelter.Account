@@ -14,7 +14,7 @@ namespace OtakuShelter.Account
 				.UseNpgsqlIdentityColumn();
 
 			builder.Property(s => s.IpAddress)
-				.HasColumnName("ipaddress")
+				.HasColumnName("ip_address")
 				.HasMaxLength(20)
 				.IsRequired();
 
@@ -32,7 +32,7 @@ namespace OtakuShelter.Account
 				.IsRequired();
 
 			builder.Property(s => s.AccountId)
-				.HasColumnName("accountid");
+				.HasColumnName("account_id");
 
 			builder.HasOne(s => s.Account)
 				.WithMany(a => a.Tokens)

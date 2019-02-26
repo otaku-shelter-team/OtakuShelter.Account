@@ -23,7 +23,7 @@ namespace OtakuShelter.Account
 				.HasName("UQ_username");
 
 			builder.Property(a => a.PasswordHash)
-				.HasColumnName("passwordhash")
+				.HasColumnName("password_hash")
 				.HasMaxLength(500)
 				.IsRequired();
 

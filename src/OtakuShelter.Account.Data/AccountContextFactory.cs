@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Phema.Configuration.Yaml;
 
@@ -32,9 +33,9 @@ namespace OtakuShelter.Account
 
 		public static void ConfigureContext(DbContextOptionsBuilder options, AccountContextConfiguration accountContext)
 		{
-			options.UseNpgsql(accountContext.ConnectionString, builder =>
-					builder.MigrationsHistoryTable(accountContext.MigrationsTable))
-				.UseLazyLoadingProxies();
+			options.UseNpgsql(accountContext.ConnectionString, 
+					builder => builder.MigrationsHistoryTable(accountContext.MigrationsTable))
+				.ConfigureWarnings(builder => builder.Throw(RelationalEventId.QueryClientEvaluationWarning));
 		}
 	}
 }

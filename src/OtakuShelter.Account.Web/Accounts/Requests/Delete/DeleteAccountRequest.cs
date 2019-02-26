@@ -7,7 +7,9 @@ namespace OtakuShelter.Account
 	{
 		public async ValueTask  Delete(AccountContext context, int accountId)
 		{
-			var account = await context.Accounts.FirstAsync(i => i.Id == accountId);
+			var account = await context.Accounts
+				.Include(a => a.Tokens)
+				.FirstAsync(i => i.Id == accountId);
 
 			context.Accounts.Remove(account);
 			context.Tokens.RemoveRange(account.Tokens);

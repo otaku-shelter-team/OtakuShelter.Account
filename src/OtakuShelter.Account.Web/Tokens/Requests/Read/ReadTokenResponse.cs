@@ -14,7 +14,9 @@ namespace OtakuShelter.Account
 		
 		public async ValueTask  Load(AccountContext context, int accountId)
 		{
-			var account = await context.Accounts.FirstAsync(a => a.Id == accountId);
+			var account = await context.Accounts
+				.Include(a => a.Tokens)
+				.FirstAsync(a => a.Id == accountId);
 
 			Tokens = account.Tokens
 				.Select(t => new ReadTokenItemResponse(t))

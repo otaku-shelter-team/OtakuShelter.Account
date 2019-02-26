@@ -27,7 +27,9 @@ namespace OtakuShelter.Account
 			AccountWebConfiguration configuration,
 			HttpContext httpContext)
 		{
-			var account = await context.Accounts.FirstAsync(a => a.Username == Username);
+			var account = await context.Accounts
+				.Include(a => a.Tokens)
+				.FirstAsync(a => a.Username == Username);
 
 			var result = hasher.VerifyHashedPassword(account, account.PasswordHash, Password);
 
