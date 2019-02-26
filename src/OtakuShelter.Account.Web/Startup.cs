@@ -2,6 +2,7 @@ using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
@@ -27,12 +28,15 @@ namespace OtakuShelter.Account
 				.AddMvcServices(configuration.Roles)
 				.AddAuthenticationServices(configuration)
 				.AddSwaggerServices()
+				.AddHealthServices(configuration.Database)
 				.BuildServiceProvider();
 		}
 
 		public void Configure(IApplicationBuilder app)
 		{
 			app.EnsureDatabaseMigrated();
+
+			app.UseHealthChecks("/health");
 			
 			app.UseAuthentication();
 			
