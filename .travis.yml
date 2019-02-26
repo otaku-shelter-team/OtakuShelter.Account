@@ -20,6 +20,9 @@ script:
     ansible-playbook deploy.yml \
     -e \"\
     otakushelter_hosts=accounts \
+    otakushelter_nginx_server_name=account.otaku-shelter.ru \
+    otakushelter_nginx_proxy_pass=http://localhost:4002 \
+    otakushelter_nginx_config=account \
     otakushelter_container=otakushelter_account \
     otakushelter_image=otakushelter/account \
     otakushelter_port=4002 \
