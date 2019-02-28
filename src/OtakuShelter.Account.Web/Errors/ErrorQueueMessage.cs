@@ -6,6 +6,9 @@ namespace OtakuShelter.Account
 	[DataContract]
 	public class ErrorQueueMessage
 	{
+		[DataMember(Name = "traceId")]
+		public string TraceId { get; set; }
+		
 		[DataMember(Name = "project")]
 		public string Project { get; set; }
 		

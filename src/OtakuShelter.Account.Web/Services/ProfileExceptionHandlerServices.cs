@@ -11,7 +11,8 @@ namespace OtakuShelter.Account
 		public static IServiceCollection AddExceptionHandlingServices(this IServiceCollection services)
 		{
 			return services.AddPhemaExceptionHandling(options =>
-				options.AddExceptionHandler<Exception, AccountExceptionHandler>(e => true));
+				options.AddExceptionHandler<Exception, AccountExceptionHandler>(e => true))
+				.AddHttpContextAccessor();
 		}
 	}
 }
