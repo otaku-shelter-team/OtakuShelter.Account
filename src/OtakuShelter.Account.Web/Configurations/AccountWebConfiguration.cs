@@ -13,6 +13,7 @@ namespace OtakuShelter.Account
 
 		public AccountRoleConfiguration Roles { get; set; }
 		public AccountContextConfiguration Database { get; set; }
+		public AccountRabbitMqConfiguration RabbitMq { get; set; }
 
 		public SymmetricSecurityKey SymmetricSecurityKey => new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Secret));
 	}
