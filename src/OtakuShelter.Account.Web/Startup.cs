@@ -1,7 +1,11 @@
 using System;
+using System.Linq;
+
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
@@ -27,7 +31,7 @@ namespace OtakuShelter.Account
 				.AddMvcServices(configuration.Roles)
 				.AddAuthenticationServices(configuration)
 				.AddSwaggerServices()
-				.AddHealthServices(configuration.Database)
+				.AddHealthServices(configuration.Database, configuration.RabbitMq)
 				.AddRabbitMqServices(configuration.RabbitMq)
 				.AddExceptionHandlingServices()
 				.BuildServiceProvider();

@@ -6,10 +6,12 @@ namespace OtakuShelter.Account
 	{
 		public static IServiceCollection AddHealthServices(
 			this IServiceCollection services,
-			AccountContextConfiguration database)
+			AccountContextConfiguration database,
+			AccountRabbitMqConfiguration rabbitMq)
 		{
 			services.AddHealthChecks()
-				.AddNpgSql(database.ConnectionString);
+				.AddNpgSql(database.ConnectionString)
+				.AddRabbitMQ(rabbitMq.ConnectionString);
 			
 			return services;
 		}
