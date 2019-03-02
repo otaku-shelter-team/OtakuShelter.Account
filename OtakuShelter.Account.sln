@@ -5,11 +5,11 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E7C524A0-7495-4C80-9D80-AEDCFC11526E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtakuShelter.Account", "src\OtakuShelter.Account\OtakuShelter.Account.csproj", "{3335A002-AFCA-42CB-A1DD-F59171587521}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtakuShelter.Accounts", "src\OtakuShelter.Accounts\OtakuShelter.Accounts.csproj", "{3335A002-AFCA-42CB-A1DD-F59171587521}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtakuShelter.Account.Data", "src\OtakuShelter.Account.Data\OtakuShelter.Account.Data.csproj", "{1FBE8CA3-2B04-450D-8753-B42864ABB5E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtakuShelter.Accounts.Data", "src\OtakuShelter.Accounts.Data\OtakuShelter.Accounts.Data.csproj", "{1FBE8CA3-2B04-450D-8753-B42864ABB5E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtakuShelter.Account.Web", "src\OtakuShelter.Account.Web\OtakuShelter.Account.Web.csproj", "{C54B629C-04D9-45E1-8994-F55B6CEF5B5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtakuShelter.Accounts.Web", "src\OtakuShelter.Accounts.Web\OtakuShelter.Accounts.Web.csproj", "{C54B629C-04D9-45E1-8994-F55B6CEF5B5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

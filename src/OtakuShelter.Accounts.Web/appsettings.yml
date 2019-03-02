@@ -1,0 +1,24 @@
+name: accounts
+
+database:
+  host: databases.staging.otaku-shelter.ru
+  port: 5432
+  database: accounts
+  userid: accounts
+  migrationstable: migrations
+
+jwt:
+  issuer: account.otaku-shelter.ru
+  audience: otaku-shelter.ru
+  maxtokenscount: 10
+
+rabbitmq:
+  instancename: accounts
+  username: accounts
+  port: 5672
+  virtualhost: /
+  hostname: rabbitmq.staging.otaku-shelter.ru
+
+roles:
+  admin: admin
+  user: user
