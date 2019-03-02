@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 
 namespace OtakuShelter.Accounts
@@ -10,6 +12,8 @@ namespace OtakuShelter.Accounts
 			this IServiceCollection services,
 			AccountsJwtConfiguration configuration)
 		{
+			services.TryAddScoped<IPasswordHasher<Account>, PasswordHasher<Account>>();
+
 			services.AddAuthentication(x =>
 				{
 					x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
