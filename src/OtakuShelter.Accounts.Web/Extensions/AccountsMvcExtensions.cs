@@ -16,7 +16,8 @@ namespace OtakuShelter.Accounts
 				.AddAuthorization(options =>
 					options.AddPolicy("admin", builder => builder.RequireRole(roles.Admin)))
 				.AddApiExplorer()
-				.AddPhemaRouting(routing => routing.AddAccountsController(roles))
+				.AddPhemaRouting(routing => routing.AddAccountsController(roles)
+					.AddTokensController(roles))
 				.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
 			return services;
