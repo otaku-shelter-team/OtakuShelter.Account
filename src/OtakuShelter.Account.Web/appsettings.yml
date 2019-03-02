@@ -7,7 +7,7 @@ database:
 
 rabbitmq:
   instancename: accounts
-  username: otakushelter
+  username: account
   port: 5672
   virtualhost: /
   hostname: rabbitmq.otaku-shelter.ru
