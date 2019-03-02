@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Phema.Configuration;
-using Phema.Configuration.Yaml;
 
 namespace OtakuShelter.Accounts
 {

@@ -15,7 +15,7 @@ namespace OtakuShelter.Accounts
 		{
 			services.AddSwaggerGen(options =>
 			{
-				options.SwaggerDoc("v1", new Info {Title = "OtakuShelter Reviews API", Version = "v1"});
+				options.SwaggerDoc("v1", new Info {Title = "OtakuShelter Accounts API", Version = "v1"});
 
 				options.AddSecurityDefinition("Bearer", new ApiKeyScheme
 				{
@@ -34,13 +34,13 @@ namespace OtakuShelter.Accounts
 			return services;
 		}
 
-		public static IApplicationBuilder UseReviewsSwagger(this IApplicationBuilder app)
+		public static IApplicationBuilder UseAccountsSwagger(this IApplicationBuilder app)
 		{
 			return app.UseSwagger()
 				.UseSwaggerUI(options =>
 				{
-					options.SwaggerEndpoint("v1/swagger.json", "OtakuShelter Reviews API v1");
-					options.DocumentTitle = "OtakuShelter Reviews API";
+					options.SwaggerEndpoint("v1/swagger.json", "OtakuShelter Accounts API v1");
+					options.DocumentTitle = "OtakuShelter Accounts API";
 					options.DocExpansion(DocExpansion.List);
 				});
 		}

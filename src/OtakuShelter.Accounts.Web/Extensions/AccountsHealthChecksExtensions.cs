@@ -1,3 +1,7 @@
+using HealthChecks.UI.Client;
+
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace OtakuShelter.Accounts
@@ -14,6 +18,14 @@ namespace OtakuShelter.Accounts
 				.AddRabbitMQ(rabbitMq.ConnectionString);
 			
 			return services;
+		}
+		
+		public static IApplicationBuilder UseAccountsHealthchecks(this IApplicationBuilder app)
+		{
+			return app.UseHealthChecks("/health", new HealthCheckOptions
+			{
+				ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+			});
 		}
 	}
 }

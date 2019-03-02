@@ -38,10 +38,10 @@ namespace OtakuShelter.Accounts
 		public void Configure(IApplicationBuilder app)
 		{
 			app.EnsureDatabaseMigrated();
-			
-			app.UseHealthChecks("/health");
+
+			app.UseAccountsHealthchecks();
 			app.UseAuthentication();
-			app.UseReviewsSwagger();
+			app.UseAccountsSwagger();
 			app.UseMvc();
 		}
 	}
