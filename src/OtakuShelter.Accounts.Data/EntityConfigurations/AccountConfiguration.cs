@@ -8,10 +8,15 @@ namespace OtakuShelter.Accounts
 		public void Configure(EntityTypeBuilder<Account> builder)
 		{
 			builder.ToTable("accounts");
-			
+
 			builder.Property(i => i.Id)
 				.HasColumnName("id")
 				.UseNpgsqlIdentityColumn();
+
+			builder.Property(i => i.Email)
+				.HasColumnName("email")
+				.HasMaxLength(100)
+				.IsRequired();
 
 			builder.Property(i => i.Username)
 				.HasColumnName("username")

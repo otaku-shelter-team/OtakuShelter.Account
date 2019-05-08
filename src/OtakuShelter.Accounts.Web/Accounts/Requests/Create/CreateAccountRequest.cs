@@ -1,15 +1,16 @@
 using System;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace OtakuShelter.Accounts
 {
 	[DataContract]
 	public class CreateAccountRequest
 	{
+		[DataMember(Name = "email")]
+		public string Email { get; set; }
+
 		[DataMember(Name = "username")]
 		public string Username { get; set; }
 		
@@ -20,6 +21,7 @@ namespace OtakuShelter.Accounts
 		{
 			var account = new Account
 			{
+				Email = Email,
 				Username = Username,
 				PasswordHash = hasher.HashPassword(null, Password),
 				Role = roles.User,
